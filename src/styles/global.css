@@ -1,0 +1,184 @@
+@import "tailwindcss";
+@import "@fontsource-variable/literata/opsz.css";
+@import "@fontsource-variable/literata/opsz-italic.css";
+
+:root {
+  --paper: #f2f4ef;
+  --ink: #17231d;
+  --pine: #1d5a42;
+  --quiet: #56665c;
+  --rule: #d2dad0;
+  --wash: #e6ebe3;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #111b16;
+    --ink: #e2e8e0;
+    --pine: #8cc3a0;
+    --quiet: #9aa99f;
+    --rule: #2a3a31;
+    --wash: #18251e;
+    color-scheme: dark;
+  }
+}
+
+@theme {
+  --font-serif: "Literata Variable", Georgia, serif;
+}
+
+@layer base {
+  html {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-serif);
+    font-size: 112.5%;
+    font-optical-sizing: auto;
+    font-variant-numeric: oldstyle-nums proportional-nums;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--paper);
+    line-height: 1.6;
+  }
+
+  ::selection {
+    background: var(--pine);
+    color: var(--paper);
+  }
+
+  a {
+    color: var(--pine);
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+
+  a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--pine);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* The page is one column of text with a margin to its left, as in a book.
+     The margin holds what places the text: section names and years. */
+  .sheet {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    column-gap: 2.5rem;
+    max-width: 50rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  @media (min-width: 52rem) {
+    .sheet {
+      grid-template-columns: 7.5rem minmax(0, 36rem);
+      padding-inline: 2rem;
+    }
+    .sheet > .full {
+      grid-column: 1 / -1;
+    }
+    .sheet > :not(.full, .margin) {
+      grid-column: 2;
+    }
+  }
+
+  .margin {
+    color: var(--quiet);
+    font-style: italic;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    padding-top: 0.3rem;
+  }
+
+  @media (max-width: 51.99rem) {
+    .margin {
+      padding-top: 0;
+      margin-bottom: 0.35rem;
+    }
+  }
+
+  .quiet {
+    color: var(--quiet);
+  }
+
+  /* Running text of the posts. */
+  .prose {
+    hyphens: auto;
+  }
+
+  .prose > * + * {
+    margin-top: 1.1em;
+  }
+
+  .prose h2 {
+    font-size: 1.35rem;
+    line-height: 1.3;
+    font-weight: 560;
+    margin-top: 2.4em;
+  }
+
+  .prose h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-top: 1.8em;
+  }
+
+  .prose h2 + *,
+  .prose h3 + * {
+    margin-top: 0.5em;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .prose li {
+    position: relative;
+    padding-left: 1.1em;
+  }
+
+  .prose li + li {
+    margin-top: 0.45em;
+  }
+
+  .prose li::before {
+    content: "";
+    position: absolute;
+    left: 0.15em;
+    top: 0.78em;
+    width: 0.35em;
+    height: 1px;
+    background: var(--quiet);
+  }
+
+  .prose blockquote {
+    border-left: 2px solid var(--pine);
+    padding-left: 1em;
+    font-style: italic;
+  }
+
+  .prose code {
+    font-size: 0.85em;
+    background: var(--wash);
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+  }
+}

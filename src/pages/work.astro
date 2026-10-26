@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import WorkEntry from '../components/WorkEntry.astro';
+import { groups } from '../data/work';
+---
+
+<Base title="Work" description="Talks, AI tools for people, and the things I build for the love of it.">
+  <div class="sheet">
+    <h1 class="text-[clamp(2rem,5vw,2.8rem)] leading-tight font-[400] tracking-[-0.018em]">Work</h1>
+    <p class="mt-4">
+      What I’ve built and said, newest first within each part. Most of my code
+      is on <a href="https://github.com/vinnyhorgan">GitHub</a>.
+    </p>
+  </div>
+
+  {
+    groups.map((group, i) => (
+      <section class="sheet mt-20" aria-labelledby={`group-${i}`}>
+        <h2 id={`group-${i}`} class="margin">
+          {group.name}
+        </h2>
+        <div>
+          {group.entries.map((entry) => (
+            <WorkEntry entry={entry} eager={i === 0} />
+          ))}
+        </div>
+      </section>
+    ))
+  }
+</Base>
