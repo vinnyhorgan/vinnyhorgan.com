@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Command from '../components/Command.astro';
 import Clawd from '../components/Clawd.astro';
+import Stickers from '../components/Stickers.astro';
 import { groups } from '../data/work';
 import { formatDate } from '../lib/dates';
 
@@ -11,7 +12,7 @@ const entries = groups.flatMap((group) => group.entries);
 ---
 
 <Base>
-  <div class="page space-y-10">
+  <div class="page relative space-y-10">
     <section class="relative" aria-labelledby="whoami">
       <Clawd />
       <Command as="h1" id="whoami">whoami</Command>
@@ -58,5 +59,7 @@ const entries = groups.flatMap((group) => group.entries);
       </p>
       <p class="comment mt-4"># updated 2026-10</p>
     </section>
+
+    <Stickers />
   </div>
 </Base>
