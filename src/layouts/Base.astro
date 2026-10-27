@@ -10,7 +10,9 @@ interface Props {
 const site = 'Vinny Horgan';
 const { title, description = 'I build AI tools for professionals, and emulators, consoles and editors for the love of it.' } = Astro.props;
 const fullTitle = title ? `${title} | ${site}` : site;
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+// Built as files (work.html), served without the extension (/work).
+const path = Astro.url.pathname.replace(/(\/index)?\.html$/, '').replace(/\/$/, '') || '/';
+const notFound = path === '/404';
 const nav = [
   { href: '/work', label: 'work' },
   { href: '/writing', label: 'writing' },
@@ -30,7 +32,10 @@ const nav = [
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    {Astro.site && <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />}
+    <meta property="og:site_name" content={site} />
+    {Astro.site && !notFound && <meta property="og:url" content={new URL(path, Astro.site)} />}
+    {Astro.site && !notFound && <link rel="canonical" href={new URL(path, Astro.site)} />}
+    {notFound && <meta name="robots" content="noindex" />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="alternate" type="application/rss+xml" title="Vinny Horgan: writing" href="/rss.xml" />
   </head>
