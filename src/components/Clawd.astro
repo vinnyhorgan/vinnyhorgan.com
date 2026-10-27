@@ -29,10 +29,12 @@
       drop-shadow(0 -2px 0 #fff) drop-shadow(0 2px 3px rgb(0 0 0 / 0.3));
   }
 
-  @media (min-width: 62rem) {
+  /* Placed like the other stickers: centred 30% of the way out into the
+     margin (this section sits 1rem inside the column's edge). */
+  @media (min-width: 75rem) {
     .clawd {
-      top: -1rem;
-      right: -7rem;
+      top: -1.5rem;
+      right: calc(-0.3 * min((100vw - 46rem) / 2, 18rem) - 32px - 1rem);
     }
 
     .clawd svg {

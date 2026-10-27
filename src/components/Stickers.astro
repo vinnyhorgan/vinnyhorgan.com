@@ -10,7 +10,7 @@ import { stickers } from '../data/stickers';
     stickers.map((s) => (
       <li
         class:list={['sticker', s.side]}
-        style={`--top: ${s.top}; --tilt: ${s.tilt}; --offset: ${s.offset}; --width: ${s.width}px`}
+        style={`--top: ${s.top}; --x: ${s.x}; --tilt: ${s.tilt}; --width: ${s.width}px`}
       >
         <a
           href={s.href}
@@ -74,12 +74,15 @@ import { stickers } from '../data/stickers';
     height: auto;
   }
 
-  @media (min-width: 70rem) {
+  @media (min-width: 75rem) {
     .stickers {
       position: absolute;
       inset: 0;
       padding: 0;
       pointer-events: none;
+      /* The side margin, from the column to the window's edge; on very wide
+         windows only its inner 18rem, so the stickers stay near the text. */
+      --margin: min((100vw - 46rem) / 2, 18rem);
     }
 
     .sticker {
@@ -89,11 +92,11 @@ import { stickers } from '../data/stickers';
     }
 
     .sticker.left {
-      left: calc(-1 * var(--offset) - var(--width) / 2);
+      left: calc(-1 * var(--x) * var(--margin) - var(--width) / 2);
     }
 
     .sticker.right {
-      right: calc(-1 * var(--offset) - var(--width) / 2);
+      right: calc(-1 * var(--x) * var(--margin) - var(--width) / 2);
     }
 
     .sticker :is(img, svg) {

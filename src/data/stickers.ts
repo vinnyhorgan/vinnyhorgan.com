@@ -4,18 +4,22 @@ import tux from '../assets/stickers/tux.svg';
 import lauzhack from '../assets/stickers/lauzhack.svg';
 import lua from '../assets/stickers/lua.svg';
 import debian from '../assets/stickers/debian.svg';
+import ted from '../assets/stickers/ted.svg';
 import raylib from '../assets/stickers/raylib.png';
 
 // Stickers down the sides of the home page, like on a laptop lid: logos of
 // what I use and pixel art of what I've made, each linking to the work it
-// stands for. `top` is measured from the top of the page's column, `width` in
+// stands for. `top` is measured from the top of the page's column; `x` is how
+// far out into the side margin the sticker's centre sits (0 at the column, 1
+// at the window's edge), so they stay on screen at any width; `width` is in
 // pixels on wide screens. Pixel art is one path per colour, so it stays clean
 // when tilted.
 //
 // Where the logos come from (each used to refer to its project): Ferris,
 // rustacean.net (public domain); Tux, Larry Ewing with The GIMP, via Wikimedia
 // Commons; LauzHack, github.com/LauzHack/LauzHack.github.io; Lua and Debian,
-// Wikimedia Commons; raylib, github.com/raysan5/raylib/tree/master/logo.
+// Wikimedia Commons; raylib, github.com/raysan5/raylib/tree/master/logo; TED,
+// the letters of the TED wordmark on Wikimedia Commons.
 export interface PixelArt {
   w: number;
   h: number;
@@ -27,8 +31,8 @@ export interface Sticker {
   href: string;
   side: 'left' | 'right';
   top: string;
+  x: number;
   tilt: string;
-  offset: string;
   width: number;
   image?: ImageMetadata;
   art?: PixelArt;
@@ -41,71 +45,29 @@ export const stickers: Sticker[] = [
     label: 'Ferris, the Rust crab',
     href: '/work#rs-pokegb',
     side: 'left',
-    top: '0rem',
-    tilt: '-8deg',
-    offset: '9rem',
-    width: 96,
+    top: '0.5rem',
+    x: 0.5,
+    tilt: '-10deg',
+    width: 100,
     image: ferris,
-  },
-  {
-    label: 'LauzHack',
-    href: '/work#lauzhack',
-    side: 'right',
-    top: '8rem',
-    tilt: '-4deg',
-    offset: '11rem',
-    width: 150,
-    image: lauzhack,
-    backing: { color: '#232634' },
   },
   {
     label: 'Tux, the Linux penguin',
     href: '/work#miniglfw',
     side: 'left',
-    top: '10rem',
-    tilt: '7deg',
-    offset: '7.5rem',
+    top: '8.5rem',
+    x: 0.28,
+    tilt: '8deg',
     width: 64,
     image: tux,
-  },
-  {
-    label: 'Lua',
-    href: '/work#wisp',
-    side: 'right',
-    top: '17rem',
-    tilt: '9deg',
-    offset: '7.5rem',
-    width: 64,
-    image: lua,
-    backing: { color: '#fff', round: true },
-  },
-  {
-    label: 'raylib',
-    href: '/work#upstream',
-    side: 'left',
-    top: '21rem',
-    tilt: '-5deg',
-    offset: '8.5rem',
-    width: 60,
-    image: raylib,
-  },
-  {
-    label: 'Debian, which Iris runs on',
-    href: '/work#iris',
-    side: 'right',
-    top: '26rem',
-    tilt: '-7deg',
-    offset: '8rem',
-    width: 60,
-    image: debian,
   },
   {
     label: 'rs-pokegb',
     href: '/work#rs-pokegb',
     side: 'left',
-    top: '31rem',
-    tilt: '-9deg',
-    offset: '8rem',
+    top: '13rem',
+    x: 0.62,
+    tilt: '-14deg',
     width: 48,
     art: {
       w: 12,
@@ -121,22 +83,56 @@ export const stickers: Sticker[] = [
     },
   },
   {
-    label: 'My TEDx talk',
+    label: 'raylib',
+    href: '/work#upstream',
+    side: 'left',
+    top: '26rem',
+    x: 0.42,
+    tilt: '5deg',
+    width: 60,
+    image: raylib,
+  },
+  {
+    label: 'LauzHack',
+    href: '/work#lauzhack',
+    side: 'right',
+    top: '7rem',
+    x: 0.48,
+    tilt: '-4deg',
+    width: 140,
+    image: lauzhack,
+    backing: { color: '#232634' },
+  },
+  {
+    label: 'Lua',
+    href: '/work#wisp',
+    side: 'right',
+    top: '12.5rem',
+    x: 0.72,
+    tilt: '12deg',
+    width: 60,
+    image: lua,
+    backing: { color: '#fff', round: true },
+  },
+  {
+    label: 'My TED talk',
     href: '/work#tedx-talk',
     side: 'right',
-    top: '36rem',
-    tilt: '-12deg',
-    offset: '7rem',
-    width: 32,
-    art: {
-      w: 8,
-      h: 14,
-      paths: [
-        { fill: '#c4c8d4', d: 'M2 0h4v1h-4zM1 1h2v1h-2zM4 1h3v1h-3zM1 2h1v1h-1zM3 2h2v1h-2zM6 2h1v1h-1zM1 3h2v1h-2zM4 3h3v1h-3zM1 4h1v1h-1zM3 4h2v1h-2zM6 4h1v1h-1zM2 5h4v1h-4z' },
-        { fill: '#6c7086', d: 'M3 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM3 3h1v1h-1zM2 4h1v1h-1zM5 4h1v1h-1z' },
-        { fill: '#e62b1e', d: 'M2 6h4v1h-4z' },
-        { fill: '#585b70', d: 'M3 7h2v1h-2zM3 8h2v1h-2zM3 9h2v1h-2zM3 10h2v1h-2zM3 11h2v1h-2zM3 12h2v1h-2zM3 13h2v1h-2z' },
-      ],
-    },
+    top: '19rem',
+    x: 0.3,
+    tilt: '-6deg',
+    width: 96,
+    image: ted,
+    backing: { color: '#fff' },
+  },
+  {
+    label: 'Debian, which Iris runs on',
+    href: '/work#iris',
+    side: 'right',
+    top: '28.5rem',
+    x: 0.55,
+    tilt: '-9deg',
+    width: 56,
+    image: debian,
   },
 ];
