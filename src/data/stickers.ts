@@ -17,9 +17,10 @@ import feynman from '../assets/stickers/feynman.jpg';
 //
 // Where the logos come from (each used to refer to its project): Ferris,
 // rustacean.net (public domain); Tux, Larry Ewing with The GIMP, via Wikimedia
-// Commons; LauzHack, github.com/LauzHack/LauzHack.github.io; Lua, C (public
-// domain) and TED (the letters of its wordmark), Wikimedia Commons; Feynman,
-// "Richard Feynman 1959" on Wikimedia Commons (public domain), cropped.
+// Commons; LauzHack, github.com/LauzHack/LauzHack.github.io; Lua (without its
+// dotted orbit), C (public domain) and TED (the letters of its wordmark),
+// Wikimedia Commons; Feynman, his Los Alamos ID badge photo (public domain),
+// Wikimedia Commons, cropped to the badge.
 export interface PixelArt {
   w: number;
   h: number;
@@ -38,8 +39,6 @@ export interface Sticker {
   art?: PixelArt;
   /* A sticker cut as a shape of its own, for logos that need a background. */
   backing?: { color: string; round?: boolean };
-  /* A photo, cut to the shape of its backing. */
-  photo?: boolean;
 }
 
 export const stickers: Sticker[] = [
@@ -114,7 +113,6 @@ export const stickers: Sticker[] = [
     tilt: '12deg',
     width: 60,
     image: lua,
-    backing: { color: '#fff', round: true },
   },
   {
     label: 'My TED talk',
@@ -130,12 +128,10 @@ export const stickers: Sticker[] = [
     label: 'Richard Feynman: what I cannot create, I do not understand',
     href: 'https://en.wikipedia.org/wiki/Richard_Feynman',
     side: 'right',
-    top: '27.5rem',
-    x: 0.52,
+    top: '26.5rem',
+    x: 0.5,
     tilt: '-7deg',
-    width: 80,
+    width: 100,
     image: feynman,
-    backing: { color: '#fff', round: true },
-    photo: true,
   },
 ];

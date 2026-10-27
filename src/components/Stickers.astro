@@ -15,7 +15,7 @@ import { stickers } from '../data/stickers';
         <a
           href={s.href}
           title={s.label}
-          class:list={[{ backed: s.backing, round: s.backing?.round, photo: s.photo }]}
+          class:list={[{ backed: s.backing, round: s.backing?.round }]}
           style={s.backing ? `--backing: ${s.backing.color}` : undefined}
         >
           {s.image && <Image src={s.image} alt={s.label} width={s.width * 2} />}
@@ -60,10 +60,6 @@ import { stickers } from '../data/stickers';
 
   .backed.round {
     padding: 6px;
-    border-radius: 50%;
-  }
-
-  .photo.round img {
     border-radius: 50%;
   }
 
