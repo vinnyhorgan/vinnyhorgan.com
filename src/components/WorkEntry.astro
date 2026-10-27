@@ -10,7 +10,7 @@ interface Props {
 const { entry, eager = false } = Astro.props;
 ---
 
-<article class="mt-10 first:mt-0">
+<article id={entry.id} class="mt-10 scroll-mt-8 first:mt-0">
   <h3 class="text-[1.1rem] leading-snug font-[600]">
     {entry.title}<span class="quiet font-normal">, {entry.when}</span>
   </h3>

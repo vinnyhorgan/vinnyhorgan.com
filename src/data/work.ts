@@ -3,11 +3,18 @@ import tedx from '../assets/tedx.jpg';
 import wisp from '../assets/wisp.png';
 
 export interface Entry {
+  id: string;
   title: string;
   when: string;
   body: string;
   links?: { href: string; label: string }[];
   image?: { src: ImageMetadata; alt: string };
+}
+
+/* One layer of the stack on the home page, from the top down. */
+export interface Layer {
+  name: string;
+  items: { label: string; href: string; note: string }[];
 }
 
 export interface Group {
@@ -17,6 +24,7 @@ export interface Group {
 }
 
 export const talk: Entry = {
+  id: 'talk',
   title: 'Can machines think?',
   when: '2024',
   body:
@@ -27,6 +35,7 @@ export const talk: Entry = {
 };
 
 export const lawFirm: Entry = {
+  id: 'law-firm',
   title: 'An AI assistant for a law firm',
   when: '2026',
   body:
@@ -35,6 +44,7 @@ export const lawFirm: Entry = {
 };
 
 export const pokegb: Entry = {
+  id: 'rs-pokegb',
   title: 'rs-pokegb',
   when: '2026',
   body:
@@ -51,6 +61,7 @@ export const groups: Group[] = [
     name: 'For people',
     entries: [
       {
+        id: 'comune',
         title: 'AI engineer, Comune di Cinisello Balsamo',
         when: '2026',
         body:
@@ -60,6 +71,7 @@ export const groups: Group[] = [
       },
       lawFirm,
       {
+        id: 'lauzhack',
         title: 'LauzHack 2025',
         when: '2025',
         body: 'A hackathon in Lausanne, which I won with a friend.',
@@ -71,6 +83,7 @@ export const groups: Group[] = [
     entries: [
       pokegb,
       {
+        id: 'otto',
         title: 'otto',
         when: '2026',
         body:
@@ -79,6 +92,7 @@ export const groups: Group[] = [
         links: [{ href: 'https://vinnyhorgan.github.io/otto/', label: 'Open otto' }],
       },
       {
+        id: 'xvi',
         title: 'xvi',
         when: '2026',
         body:
@@ -86,6 +100,7 @@ export const groups: Group[] = [
           'Its reference emulator is 4,300 lines of C that need nothing, not even libc.',
       },
       {
+        id: 'wisp',
         title: 'wisp',
         when: '2026',
         body:
@@ -94,27 +109,63 @@ export const groups: Group[] = [
         image: { src: wisp, alt: 'The wisp editor: a file tree on the left, Lua source on the right, dark theme' },
       },
       {
+        id: 'div',
         title: 'div',
         when: '2026',
         body: 'A clean-room reimplementation of the Divine Divinity engine, to run the 2002 game on modern systems. In progress.',
       },
       {
+        id: 'miniglfw',
         title: 'miniglfw',
         when: '2026',
         body: 'GLFW for Linux in a single C file, with its public headers unchanged.',
         links: [{ href: 'https://github.com/vinnyhorgan/miniglfw', label: 'miniglfw on GitHub' }],
       },
       {
+        id: 'iris',
         title: 'Iris',
         when: '2026',
         body: 'My own always-on server and agent setup. My work, my backups and the memory of what I am doing all live there.',
       },
       {
+        id: 'upstream',
         title: 'Upstream',
         when: '2025–26',
         body:
           'Small contributions merged into libraries I learned from: a NanoVG backend for sokol, and fixes in raylib and Luau.',
       },
     ],
+  },
+];
+
+export const layers: Layer[] = [
+  {
+    name: 'Agents',
+    items: [
+      { label: 'A drafting assistant', href: '/work#law-firm', note: 'for a law firm in Milan' },
+      { label: 'An act checker', href: '/work#comune', note: 'for the Comune di Cinisello Balsamo' },
+    ],
+  },
+  {
+    name: 'Editors',
+    items: [{ label: 'wisp', href: '/work#wisp', note: 'rxi’s lite, its core rewritten in Rust' }],
+  },
+  {
+    name: 'Libraries',
+    items: [
+      { label: 'miniglfw', href: '/work#miniglfw', note: 'GLFW for Linux in one C file' },
+      { label: 'Patches', href: '/work#upstream', note: 'merged into sokol, raylib and Luau' },
+    ],
+  },
+  {
+    name: 'Emulators',
+    items: [
+      { label: 'rs-pokegb', href: '/work#rs-pokegb', note: 'Pokémon Blue in one Rust file' },
+      { label: 'otto', href: '/work#otto', note: 'an 8-bit fantasy console' },
+    ],
+  },
+  {
+    name: 'Hardware',
+    items: [{ label: 'xvi', href: '/work#xvi', note: 'a portable console, specified chip by chip' }],
   },
 ];

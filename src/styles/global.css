@@ -3,23 +3,36 @@
 @import "@fontsource-variable/literata/opsz-italic.css";
 
 :root {
-  --paper: #f2f4ef;
-  --ink: #17231d;
-  --pine: #1d5a42;
-  --quiet: #56665c;
-  --rule: #d2dad0;
-  --wash: #e6ebe3;
+  --paper: #f8f8f6;
+  --ink: #1c1d1c;
+  --pine: #1f5c43;
+  --quiet: #63665f;
+  --rule: #dfe0dc;
+  --wash: #efefec;
+  /* The stack on the home page: deeper is greener, down to the metal. */
+  --s1: #eff2ee;
+  --s2: #dde7df;
+  --s3: #bcd1c3;
+  --s4: #3e7559;
+  --s5: #19412f;
+  --on-deep: #f3f6f2;
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #111b16;
-    --ink: #e2e8e0;
-    --pine: #8cc3a0;
-    --quiet: #9aa99f;
-    --rule: #2a3a31;
-    --wash: #18251e;
+    --paper: #161716;
+    --ink: #e6e6e2;
+    --pine: #86c09c;
+    --quiet: #9c9f9a;
+    --rule: #2c2e2c;
+    --wash: #1f211f;
+    --s1: #1b1e1c;
+    --s2: #1d2621;
+    --s3: #1f3128;
+    --s4: #24432f;
+    --s5: #2c5a40;
+    --on-deep: #eef3ee;
     color-scheme: dark;
   }
 }
@@ -110,6 +123,54 @@
 
   .quiet {
     color: var(--quiet);
+  }
+
+  /* The stack: one band per layer, each a shade deeper than the one above. */
+  .stack > li {
+    padding-block: 1.05rem;
+    padding-inline: 1rem;
+    max-width: none;
+    align-items: baseline;
+  }
+
+  .stack .margin {
+    padding-top: 0;
+  }
+
+  .stack li li + li {
+    margin-top: 0.3rem;
+  }
+
+  @media (min-width: 52rem) {
+    .stack > li {
+      padding-inline: 1.5rem;
+      grid-template-columns: 6rem minmax(0, 1fr);
+      column-gap: 2.5rem;
+    }
+  }
+
+  .stack > li:nth-child(1) { background: var(--s1); }
+  .stack > li:nth-child(2) { background: var(--s2); }
+  .stack > li:nth-child(3) { background: var(--s3); }
+  .stack > li:nth-child(4) { background: var(--s4); }
+  .stack > li:nth-child(5) { background: var(--s5); }
+
+  .stack > li:nth-child(n + 4) {
+    color: var(--on-deep);
+  }
+
+  .stack > li:nth-child(n + 4) .margin {
+    color: color-mix(in srgb, var(--on-deep) 72%, transparent);
+  }
+
+  .stack a {
+    color: inherit;
+    font-weight: 600;
+    text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  }
+
+  .stack a:hover {
+    text-decoration-color: currentColor;
   }
 
   /* Running text of the posts. */
