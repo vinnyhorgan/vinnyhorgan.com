@@ -8,6 +8,7 @@ export async function GET(context: APIContext) {
     title: 'Vinny Horgan: writing',
     description: 'Posts by Vinny Horgan.',
     site: context.site!,
+    trailingSlash: false,
     items: posts.map((post) => ({
       title: post.data.title,
       pubDate: post.data.date,
