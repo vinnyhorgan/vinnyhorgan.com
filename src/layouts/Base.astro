@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Command from '../components/Command.astro';
+import Clawd from '../components/Clawd.astro';
 
 interface Props {
   title?: string;
@@ -63,7 +64,10 @@ const nav = [
       <p><a href="mailto:vinnyhorgan@gmail.com">vinnyhorgan@gmail.com</a></p>
       <p><a href="https://github.com/vinnyhorgan">github.com/vinnyhorgan</a></p>
       <p class="comment mt-6"># “What I cannot create, I do not understand.” Richard Feynman</p>
-      <p class="mt-6"><span class="prompt" aria-hidden="true">~ $ </span><span class="cursor" aria-hidden="true"></span></p>
+      <p class="comment">
+        # built with <a href="https://claude.com/claude-code">Claude Code</a>
+      </p>
+      <p class="mt-6"><span class="prompt" aria-hidden="true">~ $ </span><span class="cursor" aria-hidden="true"></span><Clawd /></p>
     </footer>
   </body>
 </html>

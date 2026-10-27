@@ -1,0 +1,57 @@
+---
+// Claude Code's little guy, pixel for pixel: a terminal draws him with
+// half-block characters, so each pixel is twice as tall as it is wide.
+---
+
+<a href="https://claude.com/claude-code" class="clawd" title="Claude, who helped me build this site">
+  <svg viewBox="1 0 16 10" width="48" height="30" shape-rendering="crispEdges" role="img" aria-label="Claude Code’s mascot">
+    <g fill="#d77757">
+      <rect x="3" y="0" width="12" height="4" />
+      <rect x="1" y="4" width="16" height="2" />
+      <rect x="3" y="6" width="12" height="2" />
+      <rect x="4" y="8" width="1" height="2" />
+      <rect x="6" y="8" width="1" height="2" />
+      <rect x="11" y="8" width="1" height="2" />
+      <rect x="13" y="8" width="1" height="2" />
+    </g>
+    <rect class="eye" x="5" y="2" width="1" height="2" />
+    <rect class="eye" x="12" y="2" width="1" height="2" />
+  </svg>
+</a>
+
+<style>
+  .clawd {
+    display: inline-block;
+    margin-left: 1.5ch;
+    vertical-align: -0.45em;
+  }
+
+  .clawd:hover,
+  .clawd:active {
+    animation: hop 0.5s steps(2) 1;
+  }
+
+  .eye {
+    fill: #000;
+    animation: blink 4.5s steps(1) infinite;
+  }
+
+  @keyframes blink {
+    96% {
+      fill: #d77757;
+    }
+  }
+
+  @keyframes hop {
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .clawd,
+    .eye {
+      animation: none !important;
+    }
+  }
+</style>
