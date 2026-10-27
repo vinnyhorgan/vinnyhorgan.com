@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Command from '../components/Command.astro';
+import Clawd from '../components/Clawd.astro';
 import { groups } from '../data/work';
 import { formatDate } from '../lib/dates';
 
@@ -11,7 +12,8 @@ const entries = groups.flatMap((group) => group.entries);
 
 <Base>
   <div class="page space-y-10">
-    <section aria-labelledby="whoami">
+    <section class="relative" aria-labelledby="whoami">
+      <Clawd />
       <Command as="h1" id="whoami">whoami</Command>
       <p>
         Vinny Horgan, 22, from Monza. I’m the AI engineer at the Comune di
