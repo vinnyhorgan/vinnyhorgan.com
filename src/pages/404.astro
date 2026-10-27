@@ -1,10 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
+import Command from '../components/Command.astro';
 ---
 
 <Base title="Not found">
-  <div class="sheet">
-    <h1 class="text-[clamp(2rem,5vw,2.8rem)] leading-tight font-[400] tracking-[-0.018em]">Nothing here</h1>
-    <p class="mt-4">This page doesn’t exist. Try the <a href="/">home page</a>, my <a href="/work">work</a> or my <a href="/writing">writing</a>.</p>
+  <div class="page">
+    <Command as="h1">cat this-page</Command>
+    <p>cat: this-page: No such file or directory</p>
+    <p class="mt-6">
+      Try the <a href="/">home page</a>, my <a href="/work">work</a> or my <a href="/writing">writing</a>.
+    </p>
   </div>
 </Base>

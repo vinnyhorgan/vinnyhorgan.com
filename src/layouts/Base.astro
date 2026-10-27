@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Command from '../components/Command.astro';
 
 interface Props {
   title?: string;
@@ -11,8 +12,8 @@ const { title, description = 'I build AI tools for professionals, and emulators,
 const fullTitle = title ? `${title} | ${site}` : site;
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 const nav = [
-  { href: '/work', label: 'Work' },
-  { href: '/writing', label: 'Writing' },
+  { href: '/work', label: 'work' },
+  { href: '/writing', label: 'writing' },
 ];
 ---
 
@@ -24,8 +25,8 @@ const nav = [
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <meta name="author" content="Vinny Horgan" />
-    <meta name="theme-color" content="#f8f8f6" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#161716" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#eff1f5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1e1e2e" media="(prefers-color-scheme: dark)" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
@@ -35,46 +36,34 @@ const nav = [
   </head>
   <body>
     <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4">Skip to content</a>
-    <header class="sheet pt-8 pb-14 sm:pt-10 sm:pb-20">
-      <div class="full flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
-        <a href="/" class="text-[1.05rem] font-[620] tracking-[-0.005em] text-(--ink) no-underline" aria-current={path === '/' ? 'page' : undefined}>
-          Vinny Horgan
-        </a>
-        <nav aria-label="Main">
-          <ul class="flex gap-6">
-            {nav.map((item) => {
-              const current = path === item.href || path.startsWith(item.href + '/');
-              return (
-                <li>
-                  <a
-                    href={item.href}
-                    aria-current={current ? 'page' : undefined}
-                    class:list={['no-underline hover:underline', current ? 'text-(--ink)' : 'text-(--quiet)']}
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-      </div>
+    <header class="page flex flex-wrap items-baseline justify-between gap-x-8 pt-8 pb-14 sm:pt-12 sm:pb-20">
+      <a href="/" class="font-bold text-(--ink)" aria-current={path === '/' ? 'page' : undefined}>vinny horgan</a>
+      <nav aria-label="Main">
+        <ul class="flex gap-[2ch]">
+          {nav.map((item) => {
+            const current = path === item.href || path.startsWith(item.href + '/');
+            return (
+              <li>
+                <a href={item.href} aria-current={current ? 'page' : undefined} class={current ? 'text-(--ink)' : 'text-(--quiet)'}>
+                  {item.label}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
     </header>
 
     <main id="main">
       <slot />
     </main>
 
-    <footer class="sheet mt-28 pb-14 text-[0.9rem]">
-      <hr class="full mb-8 border-(--rule)" />
-      <p class="margin">Contact</p>
-      <div>
-        <p>
-          Write to me at <a href="mailto:vinnyhorgan@gmail.com">vinnyhorgan@gmail.com</a>.
-          My code is on <a href="https://github.com/vinnyhorgan">GitHub</a>.
-        </p>
-        <p class="quiet mt-6 italic">“What I cannot create, I do not understand.”<br />Richard Feynman</p>
-      </div>
+    <footer class="page mt-16 pb-16">
+      <Command>cat contact</Command>
+      <p><a href="mailto:vinnyhorgan@gmail.com">vinnyhorgan@gmail.com</a></p>
+      <p><a href="https://github.com/vinnyhorgan">github.com/vinnyhorgan</a></p>
+      <p class="comment mt-6"># “What I cannot create, I do not understand.” Richard Feynman</p>
+      <p class="mt-6"><span class="prompt" aria-hidden="true">~ $ </span><span class="cursor" aria-hidden="true"></span></p>
     </footer>
   </body>
 </html>

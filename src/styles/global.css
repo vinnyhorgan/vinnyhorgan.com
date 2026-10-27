@@ -1,203 +1,148 @@
 @import "tailwindcss";
-@import "@fontsource-variable/literata/opsz.css";
-@import "@fontsource-variable/literata/opsz-italic.css";
+@import "@fontsource-variable/jetbrains-mono/wght.css";
+@import "@fontsource-variable/jetbrains-mono/wght-italic.css";
 
+/* Catppuccin, as on my own desktop: Latte when light, Mocha when dark, green
+   the one accent. Latte's green and subtext are darkened to read as text. */
 :root {
-  --paper: #f8f8f6;
-  --ink: #1c1d1c;
-  --pine: #1f5c43;
-  --quiet: #63665f;
-  --rule: #dfe0dc;
-  --wash: #efefec;
-  /* The stack on the home page: deeper is greener, down to the metal. */
-  --s1: #eff2ee;
-  --s2: #dde7df;
-  --s3: #bcd1c3;
-  --s4: #3e7559;
-  --s5: #19412f;
-  --on-deep: #f3f6f2;
+  --paper: #eff1f5;
+  --ink: #4c4f69;
+  --quiet: #5c5f77;
+  --green: #2f7a20;
+  --rule: #ccd0da;
+  --wash: #e6e9ef;
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #161716;
-    --ink: #e6e6e2;
-    --pine: #86c09c;
-    --quiet: #9c9f9a;
-    --rule: #2c2e2c;
-    --wash: #1f211f;
-    --s1: #1b1e1c;
-    --s2: #1d2621;
-    --s3: #1f3128;
-    --s4: #24432f;
-    --s5: #2c5a40;
-    --on-deep: #eef3ee;
+    --paper: #1e1e2e;
+    --ink: #cdd6f4;
+    --quiet: #9399b2;
+    --green: #a6e3a1;
+    --rule: #313244;
+    --wash: #181825;
     color-scheme: dark;
   }
 }
 
 @theme {
-  --font-serif: "Literata Variable", Georgia, serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
 }
 
+/* One size of type, as in a terminal: hierarchy comes from weight and colour. */
 @layer base {
   html {
     background: var(--paper);
     color: var(--ink);
-    font-family: var(--font-serif);
-    font-size: 112.5%;
-    font-optical-sizing: auto;
-    font-variant-numeric: oldstyle-nums proportional-nums;
+    font-family: var(--font-mono);
+    font-size: 100%;
     -webkit-text-size-adjust: 100%;
-    text-rendering: optimizeLegibility;
   }
 
   body {
     background: var(--paper);
-    line-height: 1.6;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-size: inherit;
+    font-weight: 700;
   }
 
   ::selection {
-    background: var(--pine);
+    background: var(--green);
     color: var(--paper);
   }
 
   a {
-    color: var(--pine);
-    text-decoration-line: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.2em;
+    color: var(--green);
+    text-decoration-line: none;
   }
 
   a:hover {
-    text-decoration-thickness: 2px;
+    text-decoration-line: underline;
+    text-underline-offset: 0.25em;
   }
 
   :focus-visible {
-    outline: 2px solid var(--pine);
-    outline-offset: 3px;
-    border-radius: 2px;
+    outline: 2px solid var(--green);
+    outline-offset: 2px;
   }
 }
 
 @layer components {
-  /* The page is one column of text with a margin to its left, as in a book.
-     The margin holds what places the text: section names and years. */
-  .sheet {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    column-gap: 2.5rem;
-    max-width: 50rem;
-    margin-inline: auto;
-    padding-inline: 1rem;
-  }
-
-  @media (min-width: 52rem) {
-    .sheet {
-      grid-template-columns: 7.5rem minmax(0, 36rem);
-      padding-inline: 2rem;
-    }
-    .sheet > .full {
-      grid-column: 1 / -1;
-    }
-    .sheet > :not(.full, .margin) {
-      grid-column: 2;
-    }
-  }
-
-  .margin {
-    color: var(--quiet);
-    font-style: italic;
-    font-size: 0.9rem;
-    line-height: 1.4;
-    padding-top: 0.3rem;
-  }
-
-  @media (max-width: 51.99rem) {
-    .margin {
-      padding-top: 0;
-      margin-bottom: 0.35rem;
-    }
+  /* Left-aligned like a terminal, 72 columns or so. */
+  .page {
+    max-width: 44rem;
+    margin-left: clamp(1rem, 9vw, 9rem);
+    margin-right: 1rem;
   }
 
   .quiet {
     color: var(--quiet);
   }
 
-  /* The stack: one band per layer, each a shade deeper than the one above. */
-  .stack > li {
-    padding-block: 1.05rem;
-    padding-inline: 1rem;
-    max-width: none;
-    align-items: baseline;
+  /* "~ $" before a heading written as a command. */
+  .prompt {
+    color: var(--green);
+    font-weight: 700;
   }
 
-  .stack .margin {
-    padding-top: 0;
+  /* A shell comment: "# for people". */
+  .comment {
+    color: var(--quiet);
+    font-style: italic;
+    font-weight: 400;
   }
 
-  .stack li li + li {
-    margin-top: 0.3rem;
+  .cursor {
+    display: inline-block;
+    width: 0.6em;
+    height: 1.15em;
+    vertical-align: -0.2em;
+    background: var(--green);
+    animation: blink 1.1s steps(1) infinite;
   }
 
-  @media (min-width: 52rem) {
-    .stack > li {
-      padding-inline: 1.5rem;
-      grid-template-columns: 6rem minmax(0, 1fr);
-      column-gap: 2.5rem;
+  @keyframes blink {
+    50% {
+      opacity: 0;
     }
   }
 
-  .stack > li:nth-child(1) { background: var(--s1); }
-  .stack > li:nth-child(2) { background: var(--s2); }
-  .stack > li:nth-child(3) { background: var(--s3); }
-  .stack > li:nth-child(4) { background: var(--s4); }
-  .stack > li:nth-child(5) { background: var(--s5); }
-
-  .stack > li:nth-child(n + 4) {
-    color: var(--on-deep);
-  }
-
-  .stack > li:nth-child(n + 4) .margin {
-    color: color-mix(in srgb, var(--on-deep) 72%, transparent);
-  }
-
-  .stack a {
-    color: inherit;
-    font-weight: 600;
-    text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
-  }
-
-  .stack a:hover {
-    text-decoration-color: currentColor;
-  }
-
-  /* Running text of the posts. */
-  .prose {
-    hyphens: auto;
-  }
-
+  /* The posts, shown the way their Markdown reads. */
   .prose > * + * {
     margin-top: 1.1em;
   }
 
-  .prose h2 {
-    font-size: 1.35rem;
-    line-height: 1.3;
-    font-weight: 560;
-    margin-top: 2.4em;
+  .prose h2,
+  .prose h3 {
+    margin-top: 2.2em;
   }
 
-  .prose h3 {
-    font-size: 1.05rem;
-    font-weight: 600;
-    margin-top: 1.8em;
+  .prose h2::before {
+    content: "## ";
+    color: var(--quiet);
+  }
+
+  .prose h3::before {
+    content: "### ";
+    color: var(--quiet);
   }
 
   .prose h2 + *,
   .prose h3 + * {
-    margin-top: 0.5em;
+    margin-top: 0.4em;
+  }
+
+  .prose a {
+    text-decoration-line: underline;
+    text-underline-offset: 0.25em;
+    text-decoration-color: color-mix(in srgb, var(--green) 45%, transparent);
   }
 
   .prose ul {
@@ -207,39 +152,42 @@
 
   .prose li {
     position: relative;
-    padding-left: 1.1em;
+    padding-left: 2ch;
   }
 
   .prose li + li {
-    margin-top: 0.45em;
+    margin-top: 0.3em;
   }
 
   .prose li::before {
-    content: "";
+    content: "-";
     position: absolute;
-    left: 0.15em;
-    top: 0.78em;
-    width: 0.35em;
-    height: 1px;
-    background: var(--quiet);
+    left: 0;
+    color: var(--quiet);
   }
 
   .prose blockquote {
-    border-left: 2px solid var(--pine);
-    padding-left: 1em;
+    position: relative;
+    padding-left: 2ch;
     font-style: italic;
   }
 
+  .prose blockquote::before {
+    content: ">";
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-style: normal;
+  }
+
   .prose code {
-    font-size: 0.85em;
     background: var(--wash);
-    padding: 0.1em 0.3em;
-    border-radius: 3px;
+    padding: 0.1em 0.35em;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
-    scroll-behavior: auto !important;
+  .cursor {
+    animation: none;
   }
 }

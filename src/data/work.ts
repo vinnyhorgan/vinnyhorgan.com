@@ -11,12 +11,6 @@ export interface Entry {
   image?: { src: ImageMetadata; alt: string };
 }
 
-/* One layer of the stack on the home page, from the top down. */
-export interface Layer {
-  name: string;
-  items: { label: string; href: string; note: string }[];
-}
-
 export interface Group {
   name: string;
   intro?: string;
@@ -24,7 +18,7 @@ export interface Group {
 }
 
 export const talk: Entry = {
-  id: 'talk',
+  id: 'tedx-talk',
   title: 'Can machines think?',
   when: '2024',
   body:
@@ -54,11 +48,11 @@ export const pokegb: Entry = {
 
 export const groups: Group[] = [
   {
-    name: 'Talks',
+    name: 'talks',
     entries: [talk],
   },
   {
-    name: 'For people',
+    name: 'for people',
     entries: [
       {
         id: 'comune',
@@ -79,7 +73,7 @@ export const groups: Group[] = [
     ],
   },
   {
-    name: 'For the love of it',
+    name: 'for the love of it',
     entries: [
       pokegb,
       {
@@ -135,37 +129,5 @@ export const groups: Group[] = [
           'Small contributions merged into libraries I learned from: a NanoVG backend for sokol, and fixes in raylib and Luau.',
       },
     ],
-  },
-];
-
-export const layers: Layer[] = [
-  {
-    name: 'Agents',
-    items: [
-      { label: 'A drafting assistant', href: '/work#law-firm', note: 'for a law firm in Milan' },
-      { label: 'An act checker', href: '/work#comune', note: 'for the Comune di Cinisello Balsamo' },
-    ],
-  },
-  {
-    name: 'Editors',
-    items: [{ label: 'wisp', href: '/work#wisp', note: 'rxi’s lite, its core rewritten in Rust' }],
-  },
-  {
-    name: 'Libraries',
-    items: [
-      { label: 'miniglfw', href: '/work#miniglfw', note: 'GLFW for Linux in one C file' },
-      { label: 'Patches', href: '/work#upstream', note: 'merged into sokol, raylib and Luau' },
-    ],
-  },
-  {
-    name: 'Emulators',
-    items: [
-      { label: 'rs-pokegb', href: '/work#rs-pokegb', note: 'Pokémon Blue in one Rust file' },
-      { label: 'otto', href: '/work#otto', note: 'an 8-bit fantasy console' },
-    ],
-  },
-  {
-    name: 'Hardware',
-    items: [{ label: 'xvi', href: '/work#xvi', note: 'a portable console, specified chip by chip' }],
   },
 ];

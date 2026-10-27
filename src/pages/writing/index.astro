@@ -1,42 +1,31 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import Command from '../../components/Command.astro';
 import { formatDate } from '../../lib/dates';
 
 const posts = (await getCollection('writing')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const byYear = Map.groupBy(posts, (post) => post.data.date.getUTCFullYear());
 ---
 
 <Base title="Writing" description="Posts by Vinny Horgan.">
-  <div class="sheet">
-    <h1 class="text-[clamp(2rem,5vw,2.8rem)] leading-tight font-[400] tracking-[-0.018em]">Writing</h1>
-    <p class="mt-4">
-      The 2025 posts come from my first blog, “vinny’s brain”, moved here
+  <div class="page">
+    <Command as="h1">ls writing/</Command>
+    <p class="comment">
+      # The 2025 posts come from my first blog, “vinny’s brain”, moved here
       unchanged. Back then I made myself a rule: fix the form, never the
       content. If I change my mind, I write a new post.
     </p>
-  </div>
 
-  {
-    [...byYear].map(([year, list]) => (
-      <section class="sheet mt-16" aria-label={String(year)}>
-        <p class="margin" aria-hidden="true">
-          {year}
-        </p>
-        <ul class="space-y-5">
-          {list.map((post) => (
-            <li>
-              <a href={`/writing/${post.id}`} class="text-[1.1rem] font-[600] no-underline hover:underline">
-                {post.data.title}
-              </a>
-              <p class="quiet text-[0.92rem]">
-                <time datetime={post.data.date.toISOString().slice(0, 10)}>{formatDate(post.data.date)}</time>,{' '}
-                {post.data.description}
-              </p>
-            </li>
-          ))}
-        </ul>
-      </section>
-    ))
-  }
+    <ul class="mt-8 space-y-4">
+      {
+        posts.map((post) => (
+          <li>
+            <time class="quiet mr-[2ch]" datetime={formatDate(post.data.date)}>{formatDate(post.data.date)}</time>
+            <a href={`/writing/${post.id}`} class="font-bold">{post.data.title}</a>
+            <p class="quiet">{post.data.description}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </Base>

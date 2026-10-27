@@ -11,32 +11,30 @@ const { entry, eager = false } = Astro.props;
 ---
 
 <article id={entry.id} class="mt-10 scroll-mt-8 first:mt-0">
-  <h3 class="text-[1.1rem] leading-snug font-[600]">
-    {entry.title}<span class="quiet font-normal">, {entry.when}</span>
-  </h3>
-  <p class="mt-1.5">{entry.body}</p>
+  <h3>{entry.title} <span class="quiet font-normal">{entry.when}</span></h3>
+  <p>{entry.body}</p>
   {
     entry.image && (
       <Image
         src={entry.image.src}
         alt={entry.image.alt}
         widths={[640, 960, 1280]}
-        sizes="(min-width: 52rem) 36rem, calc(100vw - 2rem)"
+        sizes="(min-width: 46rem) 44rem, calc(100vw - 2rem)"
         loading={eager ? 'eager' : 'lazy'}
-        class="mt-4 w-full rounded-[3px] bg-(--wash)"
+        class="mt-4 w-full border border-(--rule)"
       />
     )
   }
   {
     entry.links && (
-      <p class="mt-2">
-        {entry.links.map((link, i) => (
-          <>
-            {i > 0 && ', '}
+      <ul class="mt-2">
+        {entry.links.map((link) => (
+          <li>
+            <span class="quiet" aria-hidden="true">-&gt; </span>
             <a href={link.href}>{link.label}</a>
-          </>
+          </li>
         ))}
-      </p>
+      </ul>
     )
   }
 </article>

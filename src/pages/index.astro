@@ -1,88 +1,60 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import WorkEntry from '../components/WorkEntry.astro';
-import { talk, layers } from '../data/work';
+import Command from '../components/Command.astro';
+import { groups } from '../data/work';
 import { formatDate } from '../lib/dates';
 
 const posts = (await getCollection('writing')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const entries = groups.flatMap((group) => group.entries);
 ---
 
 <Base>
-  <section class="sheet" aria-labelledby="hero">
-    <h1 id="hero" class="text-[clamp(1.75rem,3.6vw,2.35rem)] leading-[1.18] font-[440] tracking-[-0.012em] text-balance">
-      I build AI tools for professionals, and, for the love of it, everything underneath.
-    </h1>
-    <div class="mt-7 space-y-5">
+  <div class="page space-y-10">
+    <section aria-labelledby="whoami">
+      <Command as="h1" id="whoami">whoami</Command>
       <p>
-        I’m Vinny Horgan, 22, from Monza. I’m the AI engineer at the
-        Comune di Cinisello Balsamo, and on my own I make custom AI for
-        professionals, like the assistant a law firm in Milan has used since
-        September to draft its formal notices.
+        Vinny Horgan, 22, from Monza. I’m the AI engineer at the Comune di
+        Cinisello Balsamo, and on my own I build custom AI for professionals,
+        like the assistant a law firm in Milan has used since September to
+        draft its formal notices.
       </p>
-      <p>
-        Most of what I know I learned by building things all the way down,
-        from emulators to window libraries. As Feynman put it, what I cannot
-        create, I do not understand.
+      <p class="mt-4">
+        For the love of it, I build emulators, consoles and editors, all the
+        way down. As Feynman put it, what I cannot create, I do not
+        understand.
       </p>
-    </div>
-  </section>
+    </section>
 
-  <section class="sheet mt-16" aria-labelledby="stack">
-    <h2 id="stack" class="sr-only">All the way down</h2>
-    <ol class="full stack">
-      {
-        layers.map((layer) => (
-          <li class="sheet">
-            <p class="margin">{layer.name}</p>
-            <ul>
-              {layer.items.map((item) => (
-                <li>
-                  <a href={item.href}>{item.label}</a>, {item.note}
-                </li>
-              ))}
-            </ul>
-          </li>
-        ))
-      }
-    </ol>
-  </section>
+    <section aria-labelledby="work">
+      <Command id="work">ls work/</Command>
+      <ul class="flex flex-wrap gap-x-[3ch]">
+        {entries.map((entry) => (
+          <li><a href={`/work#${entry.id}`}>{entry.id}/</a></li>
+        ))}
+      </ul>
+    </section>
 
-  <section class="sheet mt-24" aria-labelledby="talk">
-    <h2 id="talk" class="margin">Talk</h2>
-    <div>
-      <WorkEntry entry={talk} />
-    </div>
-  </section>
-
-  <section class="sheet mt-24" aria-labelledby="writing">
-    <h2 id="writing" class="margin">Writing</h2>
-    <ul class="space-y-5">
-      {
-        posts.map((post) => (
+    <section aria-labelledby="writing">
+      <Command id="writing">ls writing/</Command>
+      <ul>
+        {posts.map((post) => (
           <li>
-            <a href={`/writing/${post.id}`} class="text-[1.1rem] font-[600] no-underline hover:underline">
-              {post.data.title}
-            </a>
-            <p class="quiet text-[0.92rem]">
-              <time datetime={post.data.date.toISOString().slice(0, 10)}>{formatDate(post.data.date)}</time>,{' '}
-              {post.data.description}
-            </p>
+            <time class="quiet mr-[2ch]" datetime={formatDate(post.data.date)}>{formatDate(post.data.date)}</time>
+            <a href={`/writing/${post.id}`}>{post.data.title}</a>
           </li>
-        ))
-      }
-    </ul>
-  </section>
+        ))}
+      </ul>
+    </section>
 
-  <section class="sheet mt-24" aria-labelledby="now">
-    <h2 id="now" class="margin">Now</h2>
-    <div class="space-y-4">
+    <section aria-labelledby="now">
+      <Command id="now">cat now.txt</Command>
       <p>
         Building AI agents at the Comune and for the law firm. Running Iris,
-        my own server, which I now use for everything. And putting this site up
-        on vinnyhorgan.com, a domain I’ve just bought back.
+        my own server, which I now use for everything. And putting this site
+        up on vinnyhorgan.com, a domain I’ve just bought back.
       </p>
-      <p class="quiet text-[0.92rem]">Updated October 2026</p>
-    </div>
-  </section>
+      <p class="comment mt-4"># updated 2026-10</p>
+    </section>
+  </div>
 </Base>

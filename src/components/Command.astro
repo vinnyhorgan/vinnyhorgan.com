@@ -1,0 +1,11 @@
+---
+// A heading written as a shell command: "~ $ ls work/".
+interface Props {
+  as?: 'h1' | 'h2';
+  id?: string;
+}
+
+const { as: Tag = 'h2', id } = Astro.props;
+---
+
+<Tag id={id}><span class="prompt" aria-hidden="true">~ $ </span><slot /></Tag>

@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import Command from '../../components/Command.astro';
 import { formatDate } from '../../lib/dates';
 
 export async function getStaticPaths() {
@@ -13,21 +14,18 @@ const { Content } = await render(post);
 ---
 
 <Base title={post.data.title} description={post.data.description}>
-  <article>
-    <header class="sheet">
-      <h1 class="text-[clamp(2rem,5.5vw,3rem)] leading-[1.1] font-[400] tracking-[-0.018em]">{post.data.title}</h1>
-      <p class="quiet mt-3">
-        <time datetime={post.data.date.toISOString().slice(0, 10)}>{formatDate(post.data.date)}</time>
+  <article class="page">
+    <header>
+      <p class="font-bold" aria-hidden="true"><span class="prompt">~ $ </span>cat writing/{post.id}.md</p>
+      <h1 class="mt-6"><span class="quiet" aria-hidden="true"># </span>{post.data.title}</h1>
+      <p class="comment">
+        # <time datetime={formatDate(post.data.date)}>{formatDate(post.data.date)}</time>
         {post.data.from === 'brain' && <>, from my first blog, “vinny’s brain”, moved here unchanged</>}
       </p>
     </header>
-    <div class="sheet mt-12">
-      <div class="prose">
-        <Content />
-      </div>
+    <div class="prose mt-8">
+      <Content />
     </div>
+    <p class="mt-14"><span class="quiet" aria-hidden="true">-&gt; </span><a href="/writing">all writing</a></p>
   </article>
-  <nav class="sheet mt-16" aria-label="Writing">
-    <p><a href="/writing">All writing</a></p>
-  </nav>
 </Base>
