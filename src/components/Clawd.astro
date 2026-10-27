@@ -24,6 +24,9 @@
     right: 0;
     rotate: 12deg;
     line-height: 0;
+    /* Die-cut like the other stickers: a white edge and a little shadow. */
+    filter: drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff)
+      drop-shadow(0 -2px 0 #fff) drop-shadow(0 2px 3px rgb(0 0 0 / 0.3));
   }
 
   @media (min-width: 62rem) {

@@ -1,19 +1,31 @@
 ---
+import { Image } from 'astro:assets';
 import { stickers } from '../data/stickers';
 
-// Pixels are 4px on wide screens, 3px in the row they make on phones.
+// On phones the stickers make a row before the footer, at three quarters size.
 ---
 
 <ul class="stickers" aria-label="Stickers">
   {
     stickers.map((s) => (
-      <li class:list={['sticker', s.side]} style={`--top: ${s.top}; --tilt: ${s.tilt}; --offset: ${s.offset}`}>
-        <a href={s.href} title={s.label} aria-label={s.label}>
-          <svg viewBox={`0 0 ${s.w} ${s.h}`} style={`--w: ${s.w}; --h: ${s.h}`} aria-hidden="true">
-            {s.paths.map((p) => (
-              <path fill={p.fill} d={p.d} />
-            ))}
-          </svg>
+      <li
+        class:list={['sticker', s.side]}
+        style={`--top: ${s.top}; --tilt: ${s.tilt}; --offset: ${s.offset}; --width: ${s.width}px`}
+      >
+        <a
+          href={s.href}
+          title={s.label}
+          class:list={[{ backed: s.backing, round: s.backing?.round }]}
+          style={s.backing ? `--backing: ${s.backing.color}` : undefined}
+        >
+          {s.image && <Image src={s.image} alt={s.label} width={s.width * 2} />}
+          {s.art && (
+            <svg viewBox={`0 0 ${s.art.w} ${s.art.h}`} role="img" aria-label={s.label}>
+              {s.art.paths.map((p) => (
+                <path fill={p.fill} d={p.d} />
+              ))}
+            </svg>
+          )}
         </a>
       </li>
     ))
@@ -26,15 +38,29 @@ import { stickers } from '../data/stickers';
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    gap: 1.75rem;
     padding-top: 1rem;
   }
 
+  /* Die-cut: a white edge that follows the shape, and a little shadow. */
   .sticker a {
     display: block;
     line-height: 0;
     rotate: var(--tilt);
     transition: rotate 0.2s ease-out;
+    filter: drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff)
+      drop-shadow(0 -2px 0 #fff) drop-shadow(0 2px 3px rgb(0 0 0 / 0.3));
+  }
+
+  .backed {
+    background: var(--backing);
+    padding: 7px 10px;
+    border-radius: 6px;
+  }
+
+  .backed.round {
+    padding: 6px;
+    border-radius: 50%;
   }
 
   /* Hovered, a sticker straightens as if you were about to peel it. */
@@ -43,9 +69,9 @@ import { stickers } from '../data/stickers';
     rotate: 0deg;
   }
 
-  .sticker svg {
-    width: calc(var(--w) * 3px);
-    height: calc(var(--h) * 3px);
+  .sticker :is(img, svg) {
+    width: calc(var(--width) * 0.75);
+    height: auto;
   }
 
   @media (min-width: 70rem) {
@@ -63,16 +89,15 @@ import { stickers } from '../data/stickers';
     }
 
     .sticker.left {
-      left: calc(-1 * var(--offset));
+      left: calc(-1 * var(--offset) - var(--width) / 2);
     }
 
     .sticker.right {
-      right: calc(-1 * var(--offset));
+      right: calc(-1 * var(--offset) - var(--width) / 2);
     }
 
-    .sticker svg {
-      width: calc(var(--w) * 4px);
-      height: calc(var(--h) * 4px);
+    .sticker :is(img, svg) {
+      width: var(--width);
     }
   }
 
