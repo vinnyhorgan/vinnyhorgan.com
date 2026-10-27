@@ -21,8 +21,8 @@ import ireland from '../assets/stickers/ireland.svg';
 // rustacean.net (public domain); Tux, Larry Ewing with The GIMP, via Wikimedia
 // Commons; LauzHack, github.com/LauzHack/LauzHack.github.io; Lua (without its
 // dotted orbit), C (public domain) and TED (the letters of its wordmark),
-// Wikimedia Commons; Feynman, his Los Alamos ID badge photo (public domain),
-// Wikimedia Commons, cropped to the badge.
+// Wikimedia Commons; Feynman, his 1965 Nobel portrait by the Nobel Foundation
+// (public domain in Sweden), English Wikipedia, trimmed at the bottom.
 export interface PixelArt {
   w: number;
   h: number;
@@ -133,7 +133,7 @@ export const stickers: Sticker[] = [
     top: '26.5rem',
     x: 0.5,
     tilt: '-7deg',
-    width: 100,
+    width: 88,
     image: feynman,
   },
   {
