@@ -123,7 +123,6 @@ export const stickers: Sticker[] = [
     tilt: '-6deg',
     width: 96,
     image: ted,
-    backing: { color: '#fff' },
   },
   {
     label: 'Debian, which Iris runs on',
