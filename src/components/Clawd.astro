@@ -4,7 +4,7 @@
 ---
 
 <a href="https://claude.com/claude-code" class="clawd" title="Claude, who helped me build this site">
-  <svg viewBox="1 0 16 10" width="48" height="30" shape-rendering="crispEdges" role="img" aria-label="Claude Code’s mascot">
+  <svg viewBox="1 0 16 10" width="32" height="20" shape-rendering="crispEdges" role="img" aria-label="Claude Code’s mascot">
     <g fill="#d77757">
       <rect x="3" y="0" width="12" height="4" />
       <rect x="1" y="4" width="16" height="2" />
@@ -20,10 +20,16 @@
 </a>
 
 <style>
+  /* Feet on the same line as the bottom of the cursor, one character after it. */
   .clawd {
     display: inline-block;
-    margin-left: 1.5ch;
-    vertical-align: -0.45em;
+    margin-left: 1ch;
+    vertical-align: -0.2em;
+    line-height: 0;
+  }
+
+  .clawd svg {
+    display: block;
   }
 
   .clawd:hover,
