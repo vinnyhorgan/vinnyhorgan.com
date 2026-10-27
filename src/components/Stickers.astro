@@ -7,12 +7,14 @@ import { stickers } from '../data/stickers';
 
 <ul class="stickers" aria-label="Stickers">
   {
-    stickers.map((s) => (
+    stickers.map((s) => {
+      const Tag = s.href ? 'a' : 'span';
+      return (
       <li
         class:list={['sticker', s.side]}
         style={`--top: ${s.top}; --x: ${s.x}; --tilt: ${s.tilt}; --width: ${s.width}px`}
       >
-        <a
+        <Tag
           href={s.href}
           title={s.label}
           class:list={[{ backed: s.backing, round: s.backing?.round }]}
@@ -26,9 +28,10 @@ import { stickers } from '../data/stickers';
               ))}
             </svg>
           )}
-        </a>
+        </Tag>
       </li>
-    ))
+      );
+    })
   }
 </ul>
 
@@ -43,7 +46,7 @@ import { stickers } from '../data/stickers';
   }
 
   /* Die-cut: a white edge that follows the shape, and a little shadow. */
-  .sticker a {
+  .sticker > :is(a, span) {
     display: block;
     line-height: 0;
     rotate: var(--tilt);
@@ -64,8 +67,8 @@ import { stickers } from '../data/stickers';
   }
 
   /* Hovered, a sticker straightens as if you were about to peel it. */
-  .sticker a:hover,
-  .sticker a:focus-visible {
+  .sticker > :hover,
+  .sticker > a:focus-visible {
     rotate: 0deg;
   }
 
@@ -105,7 +108,7 @@ import { stickers } from '../data/stickers';
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .sticker a {
+    .sticker > :is(a, span) {
       transition: none;
     }
   }

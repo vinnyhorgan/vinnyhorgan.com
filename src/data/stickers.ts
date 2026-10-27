@@ -6,10 +6,12 @@ import lua from '../assets/stickers/lua.svg';
 import ted from '../assets/stickers/ted.svg';
 import c from '../assets/stickers/c.svg';
 import feynman from '../assets/stickers/feynman.jpg';
+import italy from '../assets/stickers/italy.svg';
+import ireland from '../assets/stickers/ireland.svg';
 
 // Stickers down the sides of the home page, like on a laptop lid: logos of
 // what I use and pixel art of what I've made, each linking to the work it
-// stands for. `top` is measured from the top of the page's column; `x` is how
+// stands for, if anything. `top` is measured from the top of the page's column; `x` is how
 // far out into the side margin the sticker's centre sits (0 at the column, 1
 // at the window's edge), so they stay on screen at any width; `width` is in
 // pixels on wide screens. Pixel art is one path per colour, so it stays clean
@@ -29,7 +31,7 @@ export interface PixelArt {
 
 export interface Sticker {
   label: string;
-  href: string;
+  href?: string;
   side: 'left' | 'right';
   top: string;
   x: number;
@@ -87,7 +89,7 @@ export const stickers: Sticker[] = [
     label: 'C',
     href: '/work#xvi',
     side: 'left',
-    top: '25rem',
+    top: '23rem',
     x: 0.42,
     tilt: '6deg',
     width: 58,
@@ -133,5 +135,23 @@ export const stickers: Sticker[] = [
     tilt: '-7deg',
     width: 100,
     image: feynman,
+  },
+  {
+    label: 'Italy, where I was born and grew up',
+    side: 'left',
+    top: '38.5rem',
+    x: 0.5,
+    tilt: '-6deg',
+    width: 66,
+    image: italy,
+  },
+  {
+    label: 'Ireland, where my father is from',
+    side: 'right',
+    top: '43.5rem',
+    x: 0.42,
+    tilt: '9deg',
+    width: 74,
+    image: ireland,
   },
 ];
