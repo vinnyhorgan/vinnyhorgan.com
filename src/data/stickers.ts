@@ -3,9 +3,9 @@ import ferris from '../assets/stickers/ferris.svg';
 import tux from '../assets/stickers/tux.svg';
 import lauzhack from '../assets/stickers/lauzhack.svg';
 import lua from '../assets/stickers/lua.svg';
-import debian from '../assets/stickers/debian.svg';
 import ted from '../assets/stickers/ted.svg';
-import raylib from '../assets/stickers/raylib.png';
+import c from '../assets/stickers/c.svg';
+import feynman from '../assets/stickers/feynman.jpg';
 
 // Stickers down the sides of the home page, like on a laptop lid: logos of
 // what I use and pixel art of what I've made, each linking to the work it
@@ -17,9 +17,9 @@ import raylib from '../assets/stickers/raylib.png';
 //
 // Where the logos come from (each used to refer to its project): Ferris,
 // rustacean.net (public domain); Tux, Larry Ewing with The GIMP, via Wikimedia
-// Commons; LauzHack, github.com/LauzHack/LauzHack.github.io; Lua and Debian,
-// Wikimedia Commons; raylib, github.com/raysan5/raylib/tree/master/logo; TED,
-// the letters of the TED wordmark on Wikimedia Commons.
+// Commons; LauzHack, github.com/LauzHack/LauzHack.github.io; Lua, C (public
+// domain) and TED (the letters of its wordmark), Wikimedia Commons; Feynman,
+// "Richard Feynman 1959" on Wikimedia Commons (public domain), cropped.
 export interface PixelArt {
   w: number;
   h: number;
@@ -38,6 +38,8 @@ export interface Sticker {
   art?: PixelArt;
   /* A sticker cut as a shape of its own, for logos that need a background. */
   backing?: { color: string; round?: boolean };
+  /* A photo, cut to the shape of its backing. */
+  photo?: boolean;
 }
 
 export const stickers: Sticker[] = [
@@ -83,14 +85,14 @@ export const stickers: Sticker[] = [
     },
   },
   {
-    label: 'raylib',
-    href: '/work#upstream',
+    label: 'C',
+    href: '/work#xvi',
     side: 'left',
-    top: '26rem',
+    top: '25rem',
     x: 0.42,
-    tilt: '5deg',
-    width: 60,
-    image: raylib,
+    tilt: '6deg',
+    width: 58,
+    image: c,
   },
   {
     label: 'LauzHack',
@@ -125,13 +127,15 @@ export const stickers: Sticker[] = [
     image: ted,
   },
   {
-    label: 'Debian, which Iris runs on',
-    href: '/work#iris',
+    label: 'Richard Feynman: what I cannot create, I do not understand',
+    href: 'https://en.wikipedia.org/wiki/Richard_Feynman',
     side: 'right',
-    top: '28.5rem',
-    x: 0.55,
-    tilt: '-9deg',
-    width: 56,
-    image: debian,
+    top: '27.5rem',
+    x: 0.52,
+    tilt: '-7deg',
+    width: 80,
+    image: feynman,
+    backing: { color: '#fff', round: true },
+    photo: true,
   },
 ];
